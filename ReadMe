@@ -1,4 +1,12 @@
 1. First clone wasmtime repository (https://github.com/bytecodealliance/wasmtime)
 2. Build the wasmtime repository with cargo build
-3. Then run the cmake file in wasmtime_cpp_lib to build the shared library that will be used for java 
-4. Run WasmTimeWrapper java file to run the multiply example.
+
+For C Wrapper:
+    1. Then run the cmake file in wasmtime_cpp_lib to build the shared library that will be used for java 
+    2. Run WasmTimeWrapper java file to run the multiply example.
+
+For Rust Wrapper.
+    1. Go to wasmtime_rust_lib directory
+    2. Build the shared library with "cargo build --release" command.
+    3. Copy the generated target/release/libwasmtime_wrapper_lib.dylib to the directory of Java file.
+
