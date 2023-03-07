@@ -1,0 +1,10 @@
+[package]
+name = "host"
+version = "0.1.0"
+edition = "2021"
+
+
+[dependencies]
+anyhow = "*"
+wit-bindgen-wasmtime = { path = "/Users/akeles/workspace/wasm/wit-bindgen/crates/wasmtime" }
+wasmtime-wasi = "0.35"
