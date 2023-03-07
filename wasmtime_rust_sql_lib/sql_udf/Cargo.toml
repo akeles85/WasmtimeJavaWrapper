@@ -1,5 +1,5 @@
 [package]
-name = "guest"
+name = "sql_udf"
 version = "0.1.0"
 edition = "2021"
 

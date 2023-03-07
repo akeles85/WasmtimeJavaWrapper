@@ -1,41 +1,25 @@
 #![allow(unused_variables, dead_code)]
-
 wit_bindgen_wasmtime::import!("../wits/sql.wit");
 
 use anyhow::Result;
 use wit_bindgen_wasmtime::wasmtime::{self, Config, Engine, Instance, Linker, Module, Store};
+use jni::JNIEnv;
+use jni::objects::{JClass, JString};
 
-fn main() {
-    let path = if cfg!(not(debug_assertions)) {
-        "./target/wasm32-wasi/release/guest.wasm"
-    } else {
-        "./target/wasm32-wasi/debug/guest.wasm"
-    };
-    println!("\n\n\n\n\n");
-    println!("Running from the guest wasm");
-    run(path, "Michael");
-}
 
-fn run(path: &str, name: &str) {
+fn run(p_s8: i8, p_s16: i16, p_s32: i32, p_s64: i64, p_float32: f32, p_float64: f64, p_char: char, p_string: String) {
+    let path = "sql_udf.wasm";
+    let string_t = "test";
     use sql::{Sql, SqlData};
     type SqlStore = Store<Context<SqlData, SqlData>>;
 
     let funcs = instantiate(path, |store: &mut SqlStore, module, linker| {
         Sql::instantiate(store, module, linker, |cx| &mut cx.exports)
     });
-
-    let i8_t: i8;
-    let i16_t : i16;
-    let i32_t : i32;
-    let i64_t : i64;
-    let f32_t : f32;
-    let f64_t : f64;
-    let c_t : char;
-    let string_T : String;     
-
+     
     if let Ok((exports, mut store)) = funcs {
-        match exports.sqlmethod(&mut store, 1,2,3,4,1.1,2.2, 'c', "string") {
-            Ok((i8_t, i16_t, i32_t, i64_t, f32_t, f64_t, c_t, string_t)) => println!("{},{},{},{},{},{},{},{}", i8_t, i16_t, i32_t, i64_t, f32_t, f64_t, c_t, string_t   ),
+        match exports.sqlmethod(&mut store, p_s8, p_s16, p_s32, p_s64, p_float32, p_float64, p_char, string_t) {
+            Ok((i8_t, i16_t, i32_t, i64_t, f32_t, f64_t, c_t, string_t)) => println!("{},{},{},{},{},{},{},{}", p_s8, p_s16, p_s32, p_s64, p_float32, p_float64, p_char, string_t   ),
             Err(e) => println!("Error: {}", e),
         }
     } else {
@@ -85,4 +69,15 @@ fn instantiate<'a, I: Default, E: Default, T>(
     );
     let (exports, _instance) = mk_exports(&mut store, &module, &mut linker)?;
     Ok((exports, store))
+}
+
+// This keeps Rust from "mangling" the name and making it unique for this
+// crate.
+#[no_mangle]
+pub extern "system" fn Java_WasmtimeWrapper_sqlTypesMethod(env: JNIEnv,
+                                             class: JClass,
+                                             p_s8: i8, p_s16: i16, p_s32: i32, p_s64: i64, p_float32: f32, p_float64: f64, p_char: char, p_jstring :JString){
+    
+    let p_rust_string: String = env.get_string(p_jstring).unwrap().into();                                                
+    run( p_s8, p_s16, p_s32, p_s64, p_float32, p_float64, p_char, p_rust_string );
 }

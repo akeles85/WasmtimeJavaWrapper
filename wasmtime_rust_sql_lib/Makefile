@@ -1,8 +1,8 @@
 TARG=--target=wasm32-wasi
 
-.PHONY: build run clean guest
-build: guest
-	cargo build
+.PHONY: build run clean sql_udf
+build: sql_udf
+	cargo build $(TARG)
 
 run: build
 	cargo run
@@ -11,12 +11,12 @@ clean:
 	cargo clean
 	rm Cargo.lock
 
-guest:
-	cd guest; cargo build $(TARG) 
+sql_udf:
+	cd sql_udf; cargo build $(TARG) 
 
 .PHONY: release run-rel
 release:
-	cd guest; cargo build $(TARG) --release; cd ..
+	cd sql_udf; cargo build $(TARG) --release; cd ..
 	cargo build --release
 
 run-rel: release
