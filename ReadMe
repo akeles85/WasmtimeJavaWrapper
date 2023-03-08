@@ -10,3 +10,13 @@ For Rust Wrapper.
     2. Build the shared library with "cargo build --release" command.
     3. Copy the generated target/release/libwasmtime_wrapper_lib.dylib to the directory of Java file.
 
+For Rust Performance Test.
+    1. Go to wasmtime_rust_perf directory
+    2. Build the executable with "cargo build --release" command.
+    3. Copy wasm/multiply.wasm to wasmtime_rust_perf directory
+    4. Run the following command to start perf test
+        ./target/release/perf_test
+
+    Example output:
+    Elapsed Time: Wasm 3.03s, Native: 93.27ms
+
