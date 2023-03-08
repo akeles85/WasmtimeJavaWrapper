@@ -9,7 +9,6 @@ use jni::objects::{JClass, JString};
 
 fn run(p_s8: i8, p_s16: i16, p_s32: i32, p_s64: i64, p_float32: f32, p_float64: f64, p_char: char, p_string: String) {
     let path = "sql_udf.wasm";
-    let string_t = "test";
     use sql::{Sql, SqlData};
     type SqlStore = Store<Context<SqlData, SqlData>>;
 
@@ -18,8 +17,8 @@ fn run(p_s8: i8, p_s16: i16, p_s32: i32, p_s64: i64, p_float32: f32, p_float64: 
     });
      
     if let Ok((exports, mut store)) = funcs {
-        match exports.sqlmethod(&mut store, p_s8, p_s16, p_s32, p_s64, p_float32, p_float64, p_char, string_t) {
-            Ok((i8_t, i16_t, i32_t, i64_t, f32_t, f64_t, c_t, string_t)) => println!("{},{},{},{},{},{},{},{}", p_s8, p_s16, p_s32, p_s64, p_float32, p_float64, p_char, string_t   ),
+        match exports.sqlmethod(&mut store, p_s8, p_s16, p_s32, p_s64, p_float32, p_float64, p_char, &p_string) {
+            Ok((r_s8, r_s16, r_s32, r_s64, r_float32, r_float64, r_char, r_string, r_result)) => println!("{},{},{},{},{},{},{},{},{}", r_s8, r_s16, r_s32, r_s64, r_float32, r_float64, r_char, r_string, r_result ),
             Err(e) => println!("Error: {}", e),
         }
     } else {
