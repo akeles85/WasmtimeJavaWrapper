@@ -21,6 +21,13 @@ For Rust Performance Test.
     Example output:
     Elapsed Time: Wasm 3.03s, Native: 93.27ms
 
+For Rust SQL Types.
+    1. Go to the wasmtime_rust_sql_lib directory
+    2. Build the libraries with "make release" command.
+    3. Copy the generated target/release/libwasmtime_wrapper_sql_lib.dylib to the wasm_sql directory
+    4. Copy the generated target/wasm32-wasi/release/sql_udf.wasm to the wasm_sql directory
+    5. Run WasmtimeWrapper.java file to see the output of types printed in wasm.
+
 
 Web Assembly just supports 32 bit integer, 64 bit integer, 32 bit float and 64 bit double types.
 It is just an assembly language and you should design your data structures using this types.
