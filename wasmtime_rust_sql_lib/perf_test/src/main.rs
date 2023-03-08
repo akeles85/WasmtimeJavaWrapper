@@ -105,15 +105,3 @@ fn instantiate<'a, I: Default, E: Default, T>(
     let (exports, _instance) = mk_exports(&mut store, &module, &mut linker)?;
     Ok((exports, store))
 }
-
-// This keeps Rust from "mangling" the name and making it unique for this
-// crate.
-#[no_mangle]
-pub extern "system" fn Java_WasmtimeWrapper_sqlTypesMethod(env: JNIEnv,
-                                             class: JClass,
-                                             p_s8: i8, p_s16: i16, p_s32: i32, p_s64: i64, p_float32: f32, p_float64: f64, p_char: char, p_jstring :JString){
-    
-    let p_rust_string: String = env.get_string(p_jstring).unwrap().into();                                                
-    run( p_s8, p_s16, p_s32, p_s64, p_float32, p_float64, p_char, p_rust_string );
-}
-

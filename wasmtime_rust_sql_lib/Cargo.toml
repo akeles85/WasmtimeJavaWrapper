@@ -1,3 +1,3 @@
 [workspace]
-members = [ "jni_wrapper", "sql_udf" ]
+members = [ "jni_wrapper", "sql_udf", "perf_test" ]
 
