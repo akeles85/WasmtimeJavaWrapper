@@ -10,5 +10,8 @@ impl sql::Sql for Sql {
         (s8t, s16t, s32t, s64t, float32t, float64t, chart, stringt, result)
     }
     
+    fn add(value1: i32, value2: i32) -> (i32){
+        return value1+value2;
+    }
 }
 
