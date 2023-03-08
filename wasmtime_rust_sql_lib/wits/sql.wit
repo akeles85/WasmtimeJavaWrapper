@@ -1,2 +1,2 @@
 sqlmethod: function( s8t: s8, s16t: s16, s32t: s32, s64t: s64, float32t: float32, float64t: float64, chart: char, stringt : string) -> tuple< s8, s16, s32, s64, float32, float64, char, string, s32>
-add: function( value1: s32,  value2: s32) -> s32
+multiply: function( value1: s32,  value2: s32) -> s32

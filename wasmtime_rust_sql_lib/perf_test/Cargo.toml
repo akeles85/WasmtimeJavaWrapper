@@ -9,3 +9,6 @@ jni = "0.20.0"
 anyhow = "*"
 wit-bindgen-wasmtime = { path = "/Users/akeles/workspace/wasm/wit-bindgen/crates/wasmtime" }
 wasmtime-wasi = "0.35"
+
+[profile.release]
+opt-level = 0

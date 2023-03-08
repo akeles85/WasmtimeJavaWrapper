@@ -8,3 +8,6 @@ crate-type = ["cdylib"]
 
 [dependencies]
 wit-bindgen-rust = { path = "/Users/akeles/workspace/wasm/wit-bindgen/crates/rust-wasm" }
+
+[profile.release]
+opt-level = 0

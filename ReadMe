@@ -1,5 +1,6 @@
 1. First clone wasmtime repository (https://github.com/bytecodealliance/wasmtime)
 2. Build the wasmtime repository with cargo build
+3. Clone the wit-bindgen repository(v0.1.0) https://github.com/bytecodealliance/wit-bindgen
 
 For C Wrapper:
     1. Then run the cmake file in wasmtime_cpp_lib to build the shared library that will be used for java 
@@ -19,4 +20,32 @@ For Rust Performance Test.
 
     Example output:
     Elapsed Time: Wasm 3.03s, Native: 93.27ms
+
+
+Web Assembly just supports 32 bit integer, 64 bit integer, 32 bit float and 64 bit double types.
+It is just an assembly language and you should design your data structures using this types.
+Thanks to the binding generators, we do not need to do this manually in each project.
+Wit-bindgen, fp-bindgen, wasm-bindgen is some of the binding generators. In this repository, I used the wit-bindgen to use the following types parameters to wasm method.
+I mostly relied on wit-bindgen-example (Given at references) to use these types.
+
+signed 8 byte
+signed 16 byte
+signed 32 byte
+signed 64 byte
+float 32
+float 64
+char
+string
+
+References:
+
+https://github.com/bytecodealliance/wit-bindgen/tree/v0.1.0
+https://github.com/fiberplane/fp-bindgen
+https://blog.scottlogic.com/2022/04/16/wasm-faas.html
+https://docs.wasmtime.dev/introduction.html
+https://petermalmgren.com/serverside-wasm-data/
+https://github.com/masmullin2000/wit-bindgen-example
+
+
+
 

@@ -15,12 +15,14 @@ fn sqlmethod_native(s8t: i8, s16t: i16, s32t: i32, s64t: i64, float32t: f32, flo
     (s8t, s16t, s32t, s64t, float32t, float64t, chart, stringt, result)
 }
 
-fn add_native(value1: i32, value2: i32) -> (i32){
-    return value1+value2;
+fn multiply_native(value1: i32, value2: i32) -> Result<i32>{
+    return Ok(value1*value2);
 }
 
 fn perf_test() {
     use std::time::Instant;
+    let x = 3;
+    let y = 4;
     let path = "sql_udf.wasm";
     use sql::{Sql, SqlData};
     type SqlStore = Store<Context<SqlData, SqlData>>;
@@ -34,7 +36,7 @@ fn perf_test() {
            
     if let Ok((exports, mut store)) = funcs {                
         for n in 0..10_000_000 {
-            match exports.add(&mut store, n, n+1) {
+            match exports.multiply(&mut store, x, y) {
                 Ok(tmp_result) => total_sum_wasm += tmp_result,
                 Err(e) => println!("Error: {}", e),
             }
@@ -49,9 +51,10 @@ fn perf_test() {
 
     let mut total_sum_native = 0;
     for n in 0..10_000_000 {
-        let mut tmp_result = 0;
-        tmp_result = add_native(n, n+1);
-        total_sum_native += tmp_result;
+        match multiply_native(x, y){
+            Ok(result) => total_sum_native += result,
+            Err(e) => println!("Error: {}", e),
+        }
     }
     let elapsed_native = now_native.elapsed(); 
 
