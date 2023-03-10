@@ -10,14 +10,18 @@ We can call these files from different languages: Rust, C, Python, .Net, Go and 
 In this project, both wasm and wat file is used as example with Rust and C programming languages.
 We can call the methods with dynamic parameter and types parameters. Both of the usage is given in examples. ( wasmtime_rust_lib, wasmtime_rust_generic_lib)
 
-'''
+As an example for dynamic method call:
+
+```
     let mut params: Vec<Val> = Vec::new();    
     params.push(Val::I32(3));
     params.push(Val::I32(4));   
     
     let mut result: Vec<Val> = Vec::new();    
     result.push(Val::I32(0));
-'''    
+    
+    dynamic_method( "multiply".to_string(), params, &mut result);
+```    
 
 
 Web Assembly V1
