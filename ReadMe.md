@@ -47,16 +47,16 @@ https://github.com/masmullin2000/wit-bindgen-example
 2. Build the wasmtime repository with cargo build
 3. Clone the wit-bindgen repository(v0.1.0) https://github.com/bytecodealliance/wit-bindgen
 
-For C Wrapper:
+## For C Wrapper:
     1. Then run the cmake file in wasmtime_cpp_lib to build the shared library that will be used for java 
     2. Run WasmTimeWrapper java file to run the multiply example.
 
-For Rust Wrapper.
+## For Rust Wrapper.
     1. Go to wasmtime_rust_lib directory
     2. Build the shared library with "cargo build --release" command.
     3. Copy the generated target/release/libwasmtime_wrapper_lib.dylib to the directory of Java file.
 
-For Rust Performance Test.
+## For Rust Performance Test.
     1. Go to wasmtime_rust_perf directory
     2. Build the executable with "cargo build --release" command.
     3. Copy wasm/multiply.wasm to wasmtime_rust_perf directory
@@ -66,7 +66,7 @@ For Rust Performance Test.
     Example output:
     Elapsed Time: Wasm 3.03s, Native: 93.27ms
 
-For Rust SQL Types.
+## For Rust SQL Types.
     1. Go to the wasmtime_rust_sql_lib directory
     2. Build the libraries with "make release" command.
     3. Copy the generated target/release/libwasmtime_wrapper_sql_lib.dylib to the wasm_sql directory
