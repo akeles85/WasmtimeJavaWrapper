@@ -71,14 +71,20 @@ https://github.com/masmullin2000/wit-bindgen-example
     3. Copy the generated target/release/libwasmtime_wrapper_lib.dylib to the directory of Java file.
 
 ## For Rust Performance Test.
-    1. Go to wasmtime_rust_perf directory
-    2. Build the executable with "cargo build --release" command.
-    3. Copy wasm/multiply.wasm to wasmtime_rust_perf directory
-    4. Run the following command to start perf test
+    1. Go to wasmtime_rust_perf/wasm directory
+    2. Build the wasm file with "cargo build --release --target wasm32-unknown-unknown" command.
+    3. Copy the generated wasm file to the wasmtime_rust_perf directory
+    4. Go to wasmtime_rust_perf directory
+    5. Build the executable with "cargo build --release" command.
+    6. Run the following command to start perf test
         ./target/release/perf_test
 
     Example output:
-    Elapsed Time: Wasm 3.03s, Native: 93.27ms
+    10_000_000 iteration in wasm, no overhead call
+    Elapsed Time: Wasm 14.41ms, Native: 12.28ms
+
+    10_000_000 iteration in wasm, with overhead call
+    Elapsed Time: Wasm 384.58ms, Native: 9.39ms
 
 ## For Rust SQL Types.
     1. Go to the wasmtime_rust_sql_lib directory
