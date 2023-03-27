@@ -9,6 +9,3 @@ edition = "2021"
 jni = "0.20.0"
 wasmtime = "1.0.0"
 anyhow = { version = "1.0", default-features = false }
-
-[profile.release]
-opt-level = 0
